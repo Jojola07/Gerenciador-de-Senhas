@@ -21,16 +21,16 @@ while True:
         senha = input("Digite a senha: ")
         senhas[nome] = senha
         print("Senha adicionada com sucesso!")
-    elif opcao == "2": # LISTAR SENHAS
+    elif opcao == "2":  # LISTAR SENHAS
         print("== LISTA DE SENHAS ==")
-        for nome, senha in senhas.items():
-            print(f"Serviço: {nome} | Senha: {senha}")
-    elif not senhas: # VERIFICA SE HÁ SENHAS CADASTRADAS
+        if senhas:
+            for nome, senha in senhas.items():
+                print(f"Serviço: {nome} | Senha: {senha}")
+        else:
             print("Nenhuma senha cadastrada.")
             time.sleep(1)
-            print("Reiniciando o gerenciador de senhas...")
-            time.sleep(2)
-    elif opcao == "3": # PROCURAR SENHAS
+            continue
+    elif opcao == "3":  # PROCURAR SENHAS
         nome = input("Digite o nome do serviço para buscar a senha: ")
         if nome in senhas:
             print(f"A senha para {nome} é: {senhas[nome]}")

@@ -1,8 +1,15 @@
 # PROJETO DE CRIAR UM GERENCIADOR DE SENHAS
 
-import time
+import time,json
 
-senhas = {}
+senhas = "senhas.json"
+
+# Carregar senhas do arquivo JSON, se existir
+try:
+    with open(senhas, "r") as f:
+        senhas = json.load(f)
+except FileNotFoundError:
+    senhas = {}
 
 while True:
     print("== GERENCIADOR DE SENHAS ==")
@@ -20,11 +27,14 @@ while True:
         nome = input("Digite o nome do serviço: ")
         senha = input("Digite a senha: ")
         senhas[nome] = senha
+        with open("senhas.json", "w") as f:
+            json.dump(senhas, f)
         print("Senha adicionada com sucesso!")
     elif opcao == "2":  # LISTAR SENHAS
         print("== LISTA DE SENHAS ==")
         if senhas:
             for nome, senha in senhas.items():
+
                 print(f"Serviço: {nome} | Senha: {senha}")
         else:
             print("Nenhuma senha cadastrada.")
@@ -56,3 +66,4 @@ while True:
     else:
         print("Opção inválida. Por favor, escolha uma opção válida.")
         time.sleep(1)
+        print("Reiniciando o gerenciador de senhas...")

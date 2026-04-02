@@ -11,6 +11,9 @@ try:
 except FileNotFoundError:
     senhas = {}
 
+def salvar_senhas():
+    with open("senhas.json", "w") as f:
+        json.dump(senhas, f)   
 while True:
     print("== GERENCIADOR DE SENHAS ==")
     time.sleep(1)
@@ -27,8 +30,7 @@ while True:
         nome = input("Digite o nome do serviço: ")
         senha = input("Digite a senha: ")
         senhas[nome] = senha
-        with open("senhas.json", "w") as f:
-            json.dump(senhas, f)
+        salvar_senhas()
         print("Senha adicionada com sucesso!")
     elif opcao == "2":  # LISTAR SENHAS
         print("== LISTA DE SENHAS ==")
@@ -61,8 +63,7 @@ while True:
                 continue
             else:
                 del senhas[nome]
-                with open("senhas.json", "w") as f:
-                    json.dump(senhas, f)
+                salvar_senhas()
                 print("Senha excluída com sucesso!")
         else:
             print("Serviço não encontrado.")

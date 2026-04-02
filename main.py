@@ -52,10 +52,18 @@ while True:
     elif opcao == "4": # EXCLUIR SENHA
         nome = input("Digite o nome do serviço para excluir a senha: ")
         if nome in senhas:
-            del senhas[nome]
-            with open("senhas.json", "w") as f:
-                json.dump(senhas, f)
-            print("Senha excluída com sucesso!")
+            deletarConfirmacao = input(f"Tem certeza que deseja excluir a senha para {nome}? (s/n): ")
+            if deletarConfirmacao.lower() != 's':
+                print("Exclusão cancelada.")
+                time.sleep(1)
+                print("Voltando ao Menu...")
+                time.sleep(2)
+                continue
+            else:
+                del senhas[nome]
+                with open("senhas.json", "w") as f:
+                    json.dump(senhas, f)
+                print("Senha excluída com sucesso!")
         else:
             print("Serviço não encontrado.")
             time.sleep(1)

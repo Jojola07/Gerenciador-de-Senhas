@@ -47,17 +47,19 @@ while True:
         else:
             print("Serviço não encontrado.")
             time.sleep(1)
-            print("Reiniciando o gerenciador de senhas...")
+            print("Voltando ao Menu...")
             time.sleep(2)
     elif opcao == "4": # EXCLUIR SENHA
         nome = input("Digite o nome do serviço para excluir a senha: ")
         if nome in senhas:
             del senhas[nome]
+            with open("senhas.json", "w") as f:
+                json.dump(senhas, f)
             print("Senha excluída com sucesso!")
         else:
             print("Serviço não encontrado.")
             time.sleep(1)
-            print("Reiniciando o gerenciador de senhas...")
+            print("Voltando ao Menu...")
             time.sleep(2)
     elif opcao == "5": # SAIR
         print("Saindo do gerenciador de senhas...")
@@ -66,4 +68,4 @@ while True:
     else:
         print("Opção inválida. Por favor, escolha uma opção válida.")
         time.sleep(1)
-        print("Reiniciando o gerenciador de senhas...")
+        print("Voltando ao Menu...")
